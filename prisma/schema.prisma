@@ -1,0 +1,182 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  accounts      Account[]
+  sessions      Session[]
+  // Optional for WebAuthn support
+  Authenticator Authenticator[]
+  wallets       Wallet[]
+  participants  Participant[]
+  operations    Operation[]
+  configuration Configuration?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
+
+model Configuration {
+  id         Int                     @id @default(autoincrement())
+  ownerId    String                  @unique
+  owner      User                    @relation(fields: [ownerId], references: [id])
+  configurationCategory ConfigurationCategory[]
+  createdAt  DateTime                @default(now())
+  updatedAt  DateTime                @updatedAt
+}
+
+model Wallet {
+  id                  Int           @id @default(autoincrement())
+  name                String        @unique @db.VarChar(255)
+  initialValue        Decimal?      @db.Money
+  ownerId             String
+  isVisible           Boolean       @default(false)
+  owner               User          @relation(fields: [ownerId], references: [id])
+  entrance_operations Operation[]   @relation("EntranceWallet")
+  exit_operations     Operation[]   @relation("ExitWallet")
+  participants        Participant[]
+  walletId     Int?
+  wallet       Wallet?               @relation("WalletSubWallet", fields: [walletId], references: [id])
+  subWallets   Wallet[]              @relation("WalletSubWallet")
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+}
+
+model Operation {
+  id               Int      @id @default(autoincrement())
+  value            Decimal  @db.Money
+  observation      String?  @db.VarChar(255)
+  date             DateTime
+  month            String   @db.VarChar(7)
+  statusEntrance   Boolean  @default(false)
+  categoryId       Int
+  statusExit       Boolean  @default(false)
+  entranceWalletId Int?
+  exitWalletId     Int?
+  statusOperation  Boolean  @default(false)
+  paymentDate      DateTime?
+  ownerId          String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  owner          User       @relation(fields: [ownerId], references: [id])
+  category       Category   @relation(fields: [categoryId], references: [id])
+  entranceWallet Wallet?    @relation("EntranceWallet", fields: [entranceWalletId], references: [id])
+  exitWallet     Wallet?    @relation("ExitWallet", fields: [exitWalletId], references: [id])
+}
+
+enum CategoryType {
+  ENTRANCE
+  EXIT
+  BOTH
+}
+
+model Category {
+  id             Int                     @id @default(autoincrement())
+  name           String                  @db.VarChar(255)
+  categoryId     Int?
+  category       Category?               @relation("CategorySubcategory", fields: [categoryId], references: [id])
+  subcategories  Category[]              @relation("CategorySubcategory")
+  type           CategoryType            @default(ENTRANCE)
+  operations     Operation[]
+  configurations ConfigurationCategory[]
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+}
+
+model ConfigurationCategory {
+  configurationId Int
+  categoryId      Int
+  percentage      Int      @db.SmallInt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  configuration Configuration @relation(fields: [configurationId], references: [id])
+  category      Category      @relation(fields: [categoryId], references: [id])
+
+  @@id([configurationId, categoryId])
+}
+
+model Participant {
+  participantId String
+  walletId      Int
+  percentage    Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user   User   @relation(fields: [participantId], references: [id])
+  wallet Wallet @relation(fields: [walletId], references: [id])
+
+  @@id([participantId, walletId])
+}
