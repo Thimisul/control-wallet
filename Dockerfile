@@ -16,10 +16,10 @@ RUN \
     fi
 
 # Adjust the files and folders that should be copied to the build container
-COPY app ./app
+COPY src ./src
 COPY public ./public
-COPY components ./components
-COPY lib ./lib
+# COPY components ./components
+# COPY lib ./lib
 COPY next.config.mjs .
 COPY prisma ./prisma
 COPY components.json .
@@ -48,7 +48,7 @@ FROM base AS runner
 
 RUN apk --no-cache add curl
 
-WORKDIR /app
+WORKDIR /src
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
