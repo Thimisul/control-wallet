@@ -27,6 +27,14 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+# Environment variables must be present at build time
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
+ARG BASIC_AUTH_USER
+ENV BASIC_AUTH_USER=${BASIC_AUTH_USER}
+ARG BASIC_AUTH_PASSWORD
+ENV BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD}
+
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \
