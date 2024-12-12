@@ -26,6 +26,7 @@ COPY components.json .
 COPY tailwind.config.ts .
 COPY tsconfig.json .
 COPY postcss.config.mjs .
+COPY yarn.lock .
 
 # Environment variables must be present at build time
 ARG DATABASE_URL
