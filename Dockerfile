@@ -3,6 +3,9 @@ FROM node:18-alpine AS base
 # Step 1. Rebuild the source code only when needed
 FROM base AS builder
 
+RUN apk --no-cache add curl
+RUN apk add --no-cache openssl
+
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
@@ -55,6 +58,7 @@ RUN \
 FROM base AS runner
 
 RUN apk --no-cache add curl
+RUN apk add --no-cache openssl
 
 WORKDIR /app
 
