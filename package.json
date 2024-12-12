@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build",
+"dev": "next dev",
+    "db:migrate": "prisma migrate deploy",
+    "db:migrate-dev": "prisma migrate dev",
+    "db:reset": "prisma migrate reset",
+    "db:generate": "prisma generate",
+    "build": "yarn db:migrate && yarn db:generate && cross-env IS_BUILDING=true next build",
     "start": "next start",
     "lint": "next lint"
   },
