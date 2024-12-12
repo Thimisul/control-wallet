@@ -1,5 +1,5 @@
 import { createCategory, getAllCategories} from "@/data/category"
-import { Category, CategoryType } from "@prisma/client"
+import { CategoryType } from "@prisma/client"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(request: NextRequest) {

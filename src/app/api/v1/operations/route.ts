@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAllOperations, createOperation } from "@/data/operation";
-import { ca } from "date-fns/locale";
 
 const parseQueryParams = (searchParams: URLSearchParams) => {
   return {
