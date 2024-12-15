@@ -9,7 +9,7 @@
     "db:reset": "prisma migrate reset",
     "db:generate": "prisma generate",
     "build": "yarn db:migrate && yarn db:generate && npx prisma db seed && next build",
-    "start": "node server.js",
+    "start": "next start",
     "lint": "next lint"
   },
   "prisma": {
