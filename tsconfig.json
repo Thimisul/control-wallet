@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "prisma/localSeed.js",
+    "prisma/seed.js",
     "src/app/app/category/_components/categoryFormWithAction.tsx"
   ],
   "exclude": [
