@@ -29,12 +29,10 @@ export const getAllUsers = async (filters: UserFilters): Promise<{data: UserGetP
   return {data};
 }catch(error){
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(error.code)
     const messageError = error.code
     return {data: [], messageError}
   }
   if (error instanceof Error) {
-    console.error(error.message)
     const messageError = error.message
     return {data: [], messageError}
   }
@@ -58,12 +56,10 @@ export const getUserById = async (id: string): Promise<{data: UserGetPayloadType
   return {data};
 }catch(error){
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(error.code)
     const messageError = error.code
     return { data: null, messageError }
   }
   if (error instanceof Error) {
-    console.error(error.message)
     const messageError = error.message
     return { data: null, messageError }
   }
@@ -85,11 +81,9 @@ export const createUser = async (user: Prisma.UserCreateInput): Promise<{data: U
   return {data};
 }catch(error){
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(error.code)
     const messageError = error.code
     return { data: null, messageError };  }
   if (error instanceof Error) {
-    console.error(error.message)
     const messageError = error.message
     return { data: null, messageError }; null
   }
@@ -97,7 +91,7 @@ export const createUser = async (user: Prisma.UserCreateInput): Promise<{data: U
 return { data: null, messageError: "Unknown error or no data found" };
 };
 
-export const updateUserById = async (id: string, user: Partial<Prisma.UserUpdateInput>): Promise<{data: UserGetPayloadType | null, messageError?: string}> => {
+export const updateUserById = async (id: string, user: Prisma.UserUpdateInput): Promise<{data: UserGetPayloadType | null, messageError?: string}> => {
   try{
   const data = await prisma.user.update({
     where: {
@@ -114,12 +108,10 @@ export const updateUserById = async (id: string, user: Partial<Prisma.UserUpdate
   return {data};
 }catch(error){
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(error.code)
     const messageError = error.code
     return { data: null, messageError }
   }
   if (error instanceof Error) {
-    console.error(error.message)
     const messageError = error.message
     return { data: null, messageError }
   }
@@ -143,12 +135,10 @@ export const deleteUserById = async (id: string): Promise<{data: UserGetPayloadT
   return {data};
 }catch(error){
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(error.code)
     const messageError = error.code
     return { data: null, messageError }
   }
   if (error instanceof Error) {
-    console.error(error.message)
     const messageError = error.message
     return { data: null, messageError }
   }

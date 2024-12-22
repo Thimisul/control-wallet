@@ -121,12 +121,10 @@ export const getAllWallets = async (filters: WalletFilters): Promise<{ data: Wal
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: [], messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: [], messageError }
     }
@@ -184,12 +182,10 @@ export const createWallet = async (wallet: Prisma.WalletCreateManyInput): Promis
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }
@@ -214,12 +210,10 @@ export const deleteWalletById = async (id: number): Promise<{ data: [Prisma.Batc
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }
@@ -279,12 +273,10 @@ export const getWalletById = async (id: number): Promise<{ data: WalletGetPayloa
     return { data};
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }
@@ -359,12 +351,10 @@ export const updateWalletById = async (
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }

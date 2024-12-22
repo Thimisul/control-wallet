@@ -9,7 +9,7 @@ const OperationCreatePage = async () => {
     const walletsSelect = await getAllWalletsAction({})
 
     return (
-        <OperationForm categories={data}  wallets={walletsSelect.data} user={session?.user}></OperationForm>
+        <OperationForm categories={data}  wallets={walletsSelect.data} user={null}></OperationForm>
     )
 }
 

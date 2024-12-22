@@ -1,25 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
+import authConfig from "@/services/auth/auth.config"
+import NextAuth from "next-auth"
+import { NextRequest } from "next/server"
+ 
+const { auth } = NextAuth(authConfig)
+export default auth(async function middleware(req: NextRequest & { auth: any }) {
+    if (!req.auth && req.nextUrl.pathname !== "/auth") {
+    const newUrl = new URL("/auth", req.nextUrl.origin)
+    return Response.redirect(newUrl)
+  }})
 
-export function middleware(request : NextRequest) {
-  const isProduction = process.env.NODE_ENV === "production";
-
-  const cookieName = isProduction
-    ? "__Secure-authjs.session-token"
-    : "authjs.session-token";
-
-  const token = request.cookies.get(cookieName);
-
-  if (request.nextUrl.pathname.startsWith("/user/login") && token) {
-    return NextResponse.redirect(new URL("/app/user", request.url));
+  export const config = {
+    matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
   }
-
-  if (request.nextUrl.pathname.startsWith("/app") && !token) {
-    return NextResponse.redirect(new URL("/user/login", request.url));
-  }
-
-  return NextResponse.next();
-}
-
-export const config = {
-  matcher: ["/app/:path*", "/user/login"],
-};

@@ -2,7 +2,7 @@ import { auth } from "@/services/auth/auth"
 import { getAllWalletsAction } from "../../_actions"
 import { columns } from "./columns"
 import { DataTable } from "./data-table"
-import { getAllUsersAction } from "@/app/user/_actions"
+import { getAllUsersAction } from "@/app/app/user/_actions"
 
 export default async function TableWallet() {
   const session = await auth()

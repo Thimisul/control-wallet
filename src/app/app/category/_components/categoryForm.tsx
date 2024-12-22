@@ -55,9 +55,7 @@ const CategoryForm = ({ user, categories, data, className }: CategoryFormProps) 
 
     function handleCategoryType(values: string[]) {
         const types = values.filter(value => value !== '')
-        console.log(types)
-
-
+ 
         switch (true) {
             case types.includes('ENTRANCE') && types.includes('EXIT'):
                 form.setValue('type', CategoryType.BOTH)
@@ -85,8 +83,6 @@ const CategoryForm = ({ user, categories, data, className }: CategoryFormProps) 
                 setCategoriesList([])
                 break;
         }
-        console.log(types)
-        console.log(categoriesList)
     }
 
     async function onSubmit(data: z.infer<typeof CategoryFormSchema>) {

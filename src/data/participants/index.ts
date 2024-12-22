@@ -12,12 +12,10 @@
         return data
     } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            console.log(error.code)
             const messageError = error.code
             return []
         }
         if (error instanceof Error) {
-            console.error(error.message)
             const messageError = error.message
             return []
         }
@@ -37,12 +35,10 @@
         return data
     } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            console.log(error.code)
             const messageError = error.code
             return null
         }
         if (error instanceof Error) {
-            console.error(error.message)
             const messageError = error.message
             return null
         }
@@ -63,12 +59,10 @@ export const deleteParticipant = async (participantId: string, walletId: number)
     return data
 }catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(error.code)
         const messageError = error.code
         return null
     }
     if (error instanceof Error) {
-        console.error(error.message)
         const messageError = error.message
         return null
     }

@@ -48,12 +48,10 @@ export const getAllConfigurations = async (filters: ConfigurationFilters): Promi
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: [], messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: [], messageError }
     }
@@ -85,12 +83,10 @@ export const getConfigurationById = async (id: number): Promise<{data: Configura
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }
@@ -106,12 +102,10 @@ export const createConfiguration = async (configuration: Prisma.ConfigurationCre
     return {data} ;
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }
@@ -130,12 +124,10 @@ export const updateConfigurationById = async (id: number, configuration: Prisma.
   return { data };
 } catch (error) {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(error.code)
     const messageError = error.code
     return { data: null, messageError }
   }
   if (error instanceof Error) {
-    console.error(error.message)
     const messageError = error.message
     return { data: null, messageError }
   }
@@ -154,12 +146,10 @@ return { data: null, messageError: "Unknown error or no data found" };
       return { data }
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        console.log(error.code)
         const messageError = error.code + error.message
         return { data: null, messageError }
       }
       if (error instanceof Error) {
-        console.error(error.message)
         const messageError = error.message
         return { data: null, messageError }
       }

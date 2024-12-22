@@ -59,12 +59,10 @@ export const getAllOperations = async (filters: OperationFilters): Promise<{ dat
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: [], messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: [], messageError }
     }
@@ -88,12 +86,10 @@ export const getOperationById = async (id: number): Promise<{ data: OperationGet
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }
@@ -113,12 +109,10 @@ export const createOperation = async (operation: Prisma.OperationCreateInput): P
   return {data};
 }catch (error) {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(error.code)
     const messageError = error.code
     return { data: null, messageError }
   }
   if (error instanceof Error) {
-    console.error(error.message)
     const messageError = error.message
     return { data: null, messageError }
   }
@@ -137,7 +131,6 @@ export const updateOperationById = async (id: number, operation: Partial<Prisma.
   return {data};
 }catch (error) {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(error.code)
     const messageError = error.code
     return { data: null, messageError }
   }
@@ -160,12 +153,10 @@ export const deleteOperationById = async (id: number): Promise<{data: Operation 
   return {data};
 }catch(error){    
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(error.code)
     const messageError = error.code + error.message
     return { data: null, messageError }
   }
   if (error instanceof Error) {
-    console.error(error.message)
     const messageError = error.message
     return { data: null, messageError }
   }

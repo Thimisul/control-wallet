@@ -34,7 +34,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "prisma/seed.js",
-    "src/app/app/category/_components/categoryFormWithAction.tsx"
+    "src/app/app/category/_components/categoryFormWithAction.tsx", 
+    "src/services/auth/auth.config.ts"  
   ],
   "exclude": [
     "node_modules"

@@ -11,7 +11,6 @@ type WalletWithParticipantsCardProps = {
 }
 
 const WalletCard = ({ data }: WalletWithParticipantsCardProps) => {
-  console.log(data)
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>

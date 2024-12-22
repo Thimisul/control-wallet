@@ -10,8 +10,6 @@ const CategoryEditPage = async ({ params }: idParams) => {
     const data = await getCategoryByIdAction(Number(id))
     const categories = await getAllCategoriesAction({})
  
-
-    console.log(session)
     return (
         <CategoryForm categories={categories.data} user={session?.user} data={data}></CategoryForm>
     )

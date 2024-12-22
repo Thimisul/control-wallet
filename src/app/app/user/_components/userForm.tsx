@@ -8,8 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { User } from "@prisma/client";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
-import { useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState, useState } from "react";
+import { useFormState } from "react-dom";
 import type { ZodIssue } from "zod";
 
 type UserProps = {
@@ -23,7 +23,7 @@ type UserProps = {
 
 
 export default function UserForm({ user,action }: UserProps) {
-  const [state, formAction] = useFormState(action, { errors: [], message: "" });
+  const [state, formAction] = useActionState(action, { errors: [], message: "" });
   
   const nameErrors = findErrors("name", state.errors);
   const emailErrors = findErrors("email", state.errors);
@@ -44,10 +44,6 @@ export default function UserForm({ user,action }: UserProps) {
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
           <Input id="email" name="email" placeholder="Enter your email" type="email" defaultValue={user?.email ? user.email: '' } />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="Enter your password" type="password" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="profile-picture">Profile Picture</Label>

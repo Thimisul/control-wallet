@@ -47,12 +47,10 @@ export const getAllCategories = async (filters: CategoryFilters): Promise<{ data
     return { data }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: [], messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: [], messageError }
     }
@@ -81,12 +79,10 @@ export const getCategoryById = async (id: number): Promise<{ data: CategoryGetPa
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code);
       const messageError = error.code;
       return { data: null, messageError };
     }
     if (error instanceof Error) {
-      console.error(error.message);
       const messageError = error.message;
       return { data: null, messageError };
     }
@@ -102,12 +98,10 @@ export const createCategory = async (category: Prisma.CategoryCreateInput): Prom
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }
@@ -126,12 +120,10 @@ export const updateCategoryById = async (id: number, category: Prisma.CategoryUp
     return { data };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }
@@ -149,12 +141,10 @@ export const deleteCategoryById = async (id: number): Promise<{ data: Category |
     return { data }
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log(error.code)
       const messageError = error.code + error.message
       return { data: null, messageError }
     }
     if (error instanceof Error) {
-      console.error(error.message)
       const messageError = error.message
       return { data: null, messageError }
     }

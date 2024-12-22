@@ -20,9 +20,7 @@ const login = async (formData: FormData) => {
 }
 
 const loginCredentials = async (formData: FormData) => {
-    console.log(formData)
     const user = await signIn("credentials", formData)
-    console.log(user)
     
 }
 

@@ -72,7 +72,6 @@ const WalletForm = ({ user, wallets, users, data, className }: WalletFormProps) 
 
   async function onSubmit(data: z.infer<typeof FormWalletSchema>) {
     debugger
-    console.log("Criando Carteira")
     setLoading(true);
     const id = data?.id ? Number(data?.id) : undefined;
     const participants = data.participants.map(item => ({participantId: item.value, percentage: 10}))

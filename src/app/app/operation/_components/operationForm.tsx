@@ -81,7 +81,6 @@ const OperationForm = ({ user, wallets, categories, data, className }: Operation
     })
 
     function handleOperationType(value: string) {
-        console.log(value)
         switch (value) {
             case CategoryType.ENTRANCE:
                 form.setValue('exitWalletId', '')
@@ -122,8 +121,6 @@ const OperationForm = ({ user, wallets, categories, data, className }: Operation
     }
 
     async function onSubmit(data: z.infer<typeof OperationFormSchema>) {
-        console.log("Criando Operação")
-        console.log(data)
         setLoading(true);
         const operation = {
             id: data?.id ? Number(data?.id) : undefined,
@@ -152,7 +149,6 @@ const OperationForm = ({ user, wallets, categories, data, className }: Operation
             });
         }
     }
-    console.log(data)
     return (
         <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
@@ -183,7 +179,7 @@ const OperationForm = ({ user, wallets, categories, data, className }: Operation
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Cartegoria da Operação</FormLabel>
-                                    <Select onValueChange={(value) => { console.log(value); field.onChange(value) }} defaultValue={field.value} >
+                                    <Select onValueChange={(value) => { field.onChange(value) }} defaultValue={field.value} >
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Selecione uma opção" />
