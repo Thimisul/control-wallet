@@ -7,8 +7,8 @@ import { getAllCategoriesAction } from "@/app/app/category/_actions"
 
 export default async function TableOperation() {
   const session = await auth()
-  const allOperations = await getAllOperationsAction({})
-  const allWallets = await getAllWalletsAction({})
+  const allOperations = await getAllOperationsAction({ownerId: session?.user?.id})
+  const allWallets = await getAllWalletsAction({ownerId: session?.user?.id})
   const allCategories = await getAllCategoriesAction({})
 
   return (

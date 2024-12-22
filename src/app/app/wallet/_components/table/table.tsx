@@ -6,7 +6,7 @@ import { getAllUsersAction } from "@/app/app/user/_actions"
 
 export default async function TableWallet() {
   const session = await auth()
-  const allWallets = await getAllWalletsAction({})
+  const allWallets = await getAllWalletsAction({ownerId: session?.user?.id})
   const allUsers = await getAllUsersAction()
   
   return (
